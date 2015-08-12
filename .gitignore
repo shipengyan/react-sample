@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+build/common.js
+build/index.js
+
+# Exclude IDE project folders
+.idea
+
+# OS files
+.DS_STORE
