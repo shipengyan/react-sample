@@ -1,14 +1,14 @@
 var React = require('react');
+let mui = require('material-ui');
+let {Table, FlatButton, Dialog} = mui;
+
+let {ButtonGroup, Button} = require('react-bootstrap');
+
 
 var UserAction = require('./userAction');
 var UserStore = require('./userStore');
-
 var UserForm = require('./components/userForm');
 
-
-let mui = require('material-ui');
-let {Table, FlatButton,Dialog} = mui;
-let {ButtonGroup, Button} = require('react-bootstrap');
 
 var initStateObj = {
   labelStyle: {'textTransform': 'none'},
@@ -58,7 +58,7 @@ var UserMgr = React.createClass({
   },
   _handleUserExpired: function () {
     console.log('handle user expired');
-    this.setState({alertMsg: 'Handle user expired'});
+    this.setState({alertMsg: 'Handle user expired.(This is a react-bootstrap button, haha!! )'});
     this.refs.alertDialog.show();
   },
 
@@ -145,7 +145,6 @@ var UserMgr = React.createClass({
             <Button onClick={this._handleUserExpired}>Expired</Button>
           </ButtonGroup>
 
-
           {/* wo cao */}
           <Dialog ref="alertDialog"
                   title="Info"
@@ -166,12 +165,9 @@ var UserMgr = React.createClass({
         {/* buttons end*/}
 
         <UserForm ref="userForm"/>
-        {/*<UserForm user={this.state.currentRow}/>*/}
+        {/*<UserForm user={this.state.currentRow}/> //this is not a good habit*/}
       </div>
     );
-  },
-  _initUI: function () {
-
   }
 });
 

@@ -1,10 +1,15 @@
 import React from 'react';
-// import Hello from './test/component.jsx';
-var injectTapEventPlugin = require('react-tap-event-plugin');
+import Router from 'react-router';
 
-var App = require('./app/app.jsx');
+var AppRoutes = require('./router');
+var injectTapEventPlugin = require('react-tap-event-plugin');
 
 injectTapEventPlugin();
 
 
-React.render(<App/>, document.body);
+Router.run(AppRoutes, function (Handler, state) {
+  React.render(<Handler params={state}/>, document.body);
+});
+
+
+//React.render(<App/>, document.body);

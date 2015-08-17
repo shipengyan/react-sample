@@ -20,10 +20,11 @@
     "keymirror": "^0.1.1",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
-    "material-ui": "^0.10.2",
+    "material-ui": "^0.10.4",
     "object-assign": "^3.0.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.24.3",
+    "react-router": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6"
