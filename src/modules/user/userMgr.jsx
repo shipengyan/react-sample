@@ -7,32 +7,28 @@ var UserForm = require('./components/userForm');
 
 
 let mui = require('material-ui');
-let {Table, FlatButton} = mui;
+let {Table, FlatButton,Dialog} = mui;
 let {ButtonGroup, Button} = require('react-bootstrap');
 
+var initStateObj = {
+  labelStyle: {'textTransform': 'none'},
 
-function getState() {
-  return {
-    labelStyle: {'textTransform': 'none'},
-
-    //for table
-    fixedHeader: true,
-    fixedFooter: true,
-    stripedRows: true,
-    showRowHover: false,
-    selectable: true,
-    multiSelectable: false,
-    canSelectAll: false,
-    deselectOnClickaway: false,
-    height: '300px',
-    rowData: []
-  };
-}
-
+  //for table
+  fixedHeader: true,
+  fixedFooter: true,
+  stripedRows: true,
+  showRowHover: false,
+  selectable: true,
+  multiSelectable: false,
+  canSelectAll: false,
+  deselectOnClickaway: false,
+  height: '300px',
+  rowData: []
+};
 
 var UserMgr = React.createClass({
   getInitialState: function () {
-    return getState();
+    return initStateObj;
   },
 
   _onRowSelection: function (selectedRows) {
@@ -42,7 +38,9 @@ var UserMgr = React.createClass({
       this.setState({currentRow: null});
       return;
     }
-    this.setState({currentRow: this.state.rowData[selectedRows[0]]});
+    initStateObj.currentRow = this.state.rowData[selectedRows[0]];
+    this.setState(initStateObj);
+    this.refs.userForm.setData(initStateObj.currentRow);
   },
 
   _handleUserStatus: function (user) {
@@ -55,19 +53,32 @@ var UserMgr = React.createClass({
 
   _handleResetPwd: function (user) {
     console.log('handle user reset pwd', user);
+    this.setState({alertMsg: 'Reset user password.'});
+    this.refs.alertDialog.show();
+  },
+  _handleUserExpired: function () {
+    console.log('handle user expired');
+    this.setState({alertMsg: 'Handle user expired'});
+    this.refs.alertDialog.show();
+  },
+
+  _handleCustomDialogCancel: function () {
+    this.refs.alertDialog.dismiss();
+  },
+
+  _handleCustomDialogSubmit: function () {
+    this.refs.alertDialog.dismiss();
   },
 
   componentWillMount: function () {
     UserStore.getUsers().done(function (data) {
-      this.setState({rowData: data, currentRow: data[0]});
-    }.bind(this))
-      .fail(function () {
-        alert('fail to query users.')
-      });
+      this.setState($.extend(initStateObj, {rowData: data, currentRow: data[0]}));
+    }.bind(this)).fail(function () {
+      alert('fail to query users.')
+    });
   },
 
   componentDidMount: function () {
-
     UserStore.addChangeListener(this._onChange);
   },
 
@@ -77,13 +88,14 @@ var UserMgr = React.createClass({
 
   componentWillReceiveProps: function () {
   },
+
   shouldComponentUpdate: function (nextProp, nextState) {
     console.log('shouldComponentUpdate');
     return true;
   },
 
   _onChange: function () {
-    this.setState(getState());
+    this.setState(initStateObj);
   },
 
 
@@ -106,7 +118,6 @@ var UserMgr = React.createClass({
       statusLevel = 'Disable';
     }
 
-
     return (
       <div>
         <Table headerColumns={headerCols}
@@ -123,6 +134,7 @@ var UserMgr = React.createClass({
                onRowSelection={this._onRowSelection}>
         </Table>
 
+        {/* buttons begin*/}
         <div>
           <FlatButton
             label={statusLevel} labelStyle={this.state.labelStyle}
@@ -130,13 +142,36 @@ var UserMgr = React.createClass({
           <FlatButton label="Reset Password" labelStyle={this.state.labelStyle}
                       onClick={this._handleResetPwd.bind(this, this.state.currentRow)}/>
           <ButtonGroup>
-            <Button>Expired</Button>
+            <Button onClick={this._handleUserExpired}>Expired</Button>
           </ButtonGroup>
-        </div>
 
-        <UserForm/>
+
+          {/* wo cao */}
+          <Dialog ref="alertDialog"
+                  title="Info"
+                  actions={[
+                    <FlatButton
+                      label="Cancel"
+                      secondary={true}
+                      onTouchTap={this._handleCustomDialogCancel}/>,
+                    <FlatButton
+                      label="Submit"
+                      primary={true}
+                      onTouchTap={this._handleCustomDialogSubmit}/>
+                    ]}
+                  modal={this.state.modal}>
+            {this.state.alertMsg}
+          </Dialog>
+        </div>
+        {/* buttons end*/}
+
+        <UserForm ref="userForm"/>
+        {/*<UserForm user={this.state.currentRow}/>*/}
       </div>
     );
+  },
+  _initUI: function () {
+
   }
 });
 

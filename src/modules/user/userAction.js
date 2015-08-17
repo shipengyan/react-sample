@@ -5,10 +5,21 @@ var AppDispatcher = require('../dispatcher');
 var UserConst = require('./userConst');
 
 var userAction = {
-  create: function (userObj) {
-
+  add: function (user) {
+    AppDispatcher.dispatch({
+      actionType: UserConst.CREATE,
+      user: user
+    });
   },
-  update: function () {
+
+  update: function (user) {
+    AppDispatcher.dispatch({
+      actionType: UserConst.UPDATE,
+      user: user
+    });
+  },
+
+  del: function (user) {
 
   },
 

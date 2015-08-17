@@ -1,7 +1,17 @@
 node_modules
 npm-debug.log
+
 build/common.js
+build/common.js.map
 build/index.js
+build/index.js.map
+
+build/*.woff2
+build/*.woff
+build/*.svg
+build/*.ttf
+build/*.eot
+
 
 # Exclude IDE project folders
 .idea

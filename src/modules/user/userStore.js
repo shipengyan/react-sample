@@ -39,6 +39,34 @@ var userStore = assign({}, EventEmitter.prototype, {
 });
 
 /* User Logic begin*/
+function addUser(user) {
+  // change user to user row can be reginized by mui
+  var row = {
+    id: {content: Math.random() * 10000},
+    name: {content: user.userName},
+    code: {content: user.userCode},
+    status: {content: 'Enable'},
+    effectDate: {content: user.effectDate},
+    expiredDate: {content: user.expiredDate}
+  };
+  UserData.unshift(row);
+}
+
+function updateUser(user) {
+  $.each(UserData, function (index, item) {
+    if (item.id.content == user.id) {
+      item.name.content = user.userName;
+      item.code.content = user.userCode;
+      item.email.content = user.email;
+      item.mobile.content = user.mobile;
+      item.effectDate.content = user.effectDate;
+      item.expiredDate = user.expiredDate;
+
+      return false;
+    }
+  });
+}
+
 function changeStatus(id) {
   var record = null;
   $.each(UserData, function (index, user) {
@@ -52,13 +80,21 @@ function changeStatus(id) {
 }
 
 /* User Logic end*/
-
 AppDispatcher.register(function (action) {
 
   switch (action.actionType) {
+    case  UserConst.CREATE:
+      addUser(action.user);
+      break;
+
+    case UserConst.UPDATE:
+      updateUser(action.user);
+      break;
+
     case UserConst.CHANGE_STATUS:
       changeStatus(action.id);
       break;
+
     case UserConst.RESET_PWD:
       resetPwd(action.id);
       break;
