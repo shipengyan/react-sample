@@ -1,10 +1,19 @@
 # React-sample
 
 
+## Architecture
+* React
+* flux
+* bootstrap
+* material-ui
+
+* babel
+* webpack
+
 ## Development
 
 `npm start`
 
 ## Production
 
-`npm production`
+`webpack --progress --config webpack.config.js`
