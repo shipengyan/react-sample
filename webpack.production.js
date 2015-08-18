@@ -5,10 +5,12 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 
 module.exports = {
-  devtool: 'source-map',
-  entry: [
-    './src/modules/index.js'
-  ],
+  //devtool: 'source-map',
+  entry: {
+    index: [
+      './src/modules/index.js'
+    ]
+  },
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: '/build/',

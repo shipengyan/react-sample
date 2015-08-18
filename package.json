@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "node server.js",
-    "production": "webpack --config webpack.production.js",
+    "production": "webpack --progress --config webpack.production.js",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

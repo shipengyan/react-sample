@@ -1,6 +1,5 @@
 var React = require('react');
 var Router = require('react-router');
-require('bootstrap/dist/css/bootstrap.css');
 var bootstrap = require('react-bootstrap');
 var mui = require('material-ui');
 
