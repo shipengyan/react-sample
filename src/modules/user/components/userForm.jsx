@@ -2,12 +2,12 @@
  * Created by shi.pengyan on 2015-08-06.
  */
 var React = require('react');
+var mui = require('material-ui');
+
+var {TextField, DatePicker, RaisedButton } = mui;
 
 var UserAction = require('../userAction');
-var UserStore = require('../userStore');
 
-let mui = require('material-ui');
-let {TextField, DatePicker, RaisedButton } = mui;
 
 var UserForm = React.createClass({
   getInitialState: function () {
@@ -49,12 +49,12 @@ var UserForm = React.createClass({
 
     switch (this.state.mode) {
       case 'NEW':
-        UserAction.add(user);
+        UserAction.addUser(user);
         break;
       case 'EDIT':
         //user.id = this.prop.user.id.content;
         user.id = this.user.id.content;
-        UserAction.update(user);
+        UserAction.updateUser(user);
         break;
     }
 
@@ -112,7 +112,7 @@ var UserForm = React.createClass({
   },
 
   render: function () {
-    //TODO 表单类型的不要使用props传递值，否则需要处理每个change事件
+    //TODO 锟斤拷锟斤拷锟酵的诧拷要使锟斤拷props锟斤拷锟斤拷值锟斤拷锟斤拷锟斤拷锟斤拷要锟斤拷锟斤拷每锟斤拷change锟铰硷拷
     //var name, code, email, mobile, effectDate, expiredDate;
     //if (this.props.user) {
     //  name = this.props.user.name.content;

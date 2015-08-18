@@ -1,92 +1,36 @@
-var React = require('react');
-let mui = require('material-ui');
-let {Table, FlatButton, Dialog} = mui;
+import React from 'react';
+import Reflux from 'reflux';
+import Mui from 'material-ui';
+//import Bootstrap from 'react-bootstrap'; //error fuck, it's wield
 
-let {ButtonGroup, Button} = require('react-bootstrap');
-
-
-var UserAction = require('./userAction');
-var UserStore = require('./userStore');
-var UserForm = require('./components/userForm');
+let Bootstrap = require('react-bootstrap');
 
 
-var initStateObj = {
-  labelStyle: {'textTransform': 'none'},
+let {Table, FlatButton, Dialog} = Mui;
+let {ButtonGroup, Button} = Bootstrap;
 
-  //for table
-  fixedHeader: true,
-  fixedFooter: true,
-  stripedRows: true,
-  showRowHover: false,
-  selectable: true,
-  multiSelectable: false,
-  canSelectAll: false,
-  deselectOnClickaway: false,
-  height: '300px',
-  rowData: []
-};
 
-var UserMgr = React.createClass({
-  getInitialState: function () {
-    return initStateObj;
+let UserAction = require('./userAction');
+let UserStore = require('./userStore');
+
+let UserList = require('./components/userList');
+let UserForm = require('./components/userForm');
+
+
+let UserMgr = React.createClass({
+  getInitialState(){
+    return {
+      currentRow: null
+    };
   },
-
-  _onRowSelection: function (selectedRows) {
-    console.log('row selection', selectedRows);
-
-    if (!selectedRows.length) {
-      this.setState({currentRow: null});
-      return;
-    }
-    initStateObj.currentRow = this.state.rowData[selectedRows[0]];
-    this.setState(initStateObj);
-    this.refs.userForm.setData(initStateObj.currentRow);
-  },
-
-  _handleUserStatus: function (user) {
-    if (!this.state.currentRow) {
-      return;
-    }
-    console.log('handle user state', user);
-    UserAction.changeStatus(user.id.content);
-  },
-
-  _handleResetPwd: function (user) {
-    console.log('handle user reset pwd', user);
-    this.setState({alertMsg: 'Reset user password.'});
-    this.refs.alertDialog.show();
-  },
-  _handleUserExpired: function () {
-    console.log('handle user expired');
-    this.setState({alertMsg: 'Handle user expired.(This is a react-bootstrap button, haha!! )'});
-    this.refs.alertDialog.show();
-  },
-
-  _handleCustomDialogCancel: function () {
-    this.refs.alertDialog.dismiss();
-  },
-
-  _handleCustomDialogSubmit: function () {
-    this.refs.alertDialog.dismiss();
-  },
-
-  componentWillMount: function () {
-    UserStore.getUsers().done(function (data) {
-      this.setState($.extend(initStateObj, {rowData: data, currentRow: data[0]}));
-    }.bind(this)).fail(function () {
-      alert('fail to query users.')
-    });
+  parentSelectionFunc: function (user) {
+    this.refs.userForm.setData(user);
   },
 
   componentDidMount: function () {
-    UserStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    UserStore.removeChangeListener(this._onChange);
-  },
-
-  componentWillReceiveProps: function () {
   },
 
   shouldComponentUpdate: function (nextProp, nextState) {
@@ -94,81 +38,96 @@ var UserMgr = React.createClass({
     return true;
   },
 
-  _onChange: function () {
-    this.setState(initStateObj);
-  },
-
-
   render: function () {
-    console.log('render...');
-    // Column configuration
-    let headerCols = {
-      name: {content: 'Name', tooltip: 'The name'},
-      code: {content: 'Code', tooltip: 'The Code'},
-      status: {content: 'Status', tooltip: 'The status'},
-      effectDate: {content: 'Effect Date', tooltip: 'The Effect Date'},
-      expiredDate: {content: 'Expired Date', tooltip: 'The Expired Date'}
-    };
-    let colOrder = ['name', 'code', 'status', 'effectDate', 'expiredDate'];
-
-    var statusLevel;
-    if (this.state.currentRow) {
-      statusLevel = this.state.currentRow.status.content === 'Enable' ? 'Disable' : 'Enable';
-    } else {
-      statusLevel = 'Disable';
-    }
+    console.log('render User Mgr Page...');
 
     return (
       <div>
-        <Table headerColumns={headerCols}
-               columnOrder={colOrder}
-               rowData={this.state.rowData}
-               height={this.state.height}
-               fixedHeader={this.state.fixedHeader}
-               stripedRows={this.state.stripedRows}
-               showRowHover={this.state.showRowHover}
-               selectable={this.state.selectable}
-               multiSelectable={this.state.multiSelectable}
-               canSelectAll={this.state.canSelectAll}
-               deselectOnClickaway={this.state.deselectOnClickaway}
-               onRowSelection={this._onRowSelection}>
-        </Table>
-
-        {/* buttons begin*/}
-        <div>
-          <FlatButton
-            label={statusLevel} labelStyle={this.state.labelStyle}
-            onClick={this._handleUserStatus.bind(this, this.state.currentRow)}/>
-          <FlatButton label="Reset Password" labelStyle={this.state.labelStyle}
-                      onClick={this._handleResetPwd.bind(this, this.state.currentRow)}/>
-          <ButtonGroup>
-            <Button onClick={this._handleUserExpired}>Expired</Button>
-          </ButtonGroup>
-
-          {/* wo cao */}
-          <Dialog ref="alertDialog"
-                  title="Info"
-                  actions={[
-                    <FlatButton
-                      label="Cancel"
-                      secondary={true}
-                      onTouchTap={this._handleCustomDialogCancel}/>,
-                    <FlatButton
-                      label="Submit"
-                      primary={true}
-                      onTouchTap={this._handleCustomDialogSubmit}/>
-                    ]}
-                  modal={this.state.modal}>
-            {this.state.alertMsg}
-          </Dialog>
-        </div>
-        {/* buttons end*/}
-
+        <UserList/>
         <UserForm ref="userForm"/>
-        {/*<UserForm user={this.state.currentRow}/> //this is not a good habit*/}
-      </div>
-    );
+      </div> );
   }
+
 });
 
 module.exports = UserMgr;
+
+//TODO mixins in es6 is terrible, you should use 'es6-mixins' module
+
+//class UserMgr extends React.Component {
+//  mixins = [];
+//
+//
+//  _onChange() {
+//  }
+//
+//
+//}
+//
+//export default UserMgr;
+//
+//let UserMgr = React.createClass({
+//
+//
+//  getInitialState: function () {
+//    return initStateObj;
+//  },
+//
+//  _onRowSelection: function (selectedRows) {
+//    console.log('row selection', selectedRows);
+//
+//    if (!selectedRows.length) {
+//      this.setState({currentRow: null});
+//      return;
+//    }
+//    initStateObj.currentRow = this.state.rowData[selectedRows[0]];
+//    this.setState(initStateObj);
+//    this.refs.userForm.setData(initStateObj.currentRow);
+//  },
+//
+//  _handleUserStatus: function (user) {
+//    if (!this.state.currentRow) {
+//      return;
+//    }
+//    console.log('handle user state', user);
+//    UserAction.changeUserStatus(user.id.content);
+//  },
+//
+//  _handleResetPwd: function (user) {
+//    console.log('handle user reset pwd', user);
+//    this.setState({alertMsg: 'Reset user password.'});
+//    this.refs.alertDialog.show();
+//  },
+//  _handleUserExpired: function () {
+//    console.log('handle user expired');
+//    this.setState({alertMsg: 'Handle user expired.(This is a react-bootstrap button, haha!! )'});
+//    this.refs.alertDialog.show();
+//  },
+//
+//  _handleCustomDialogCancel: function () {
+//    this.refs.alertDialog.dismiss();
+//  },
+//
+//  _handleCustomDialogSubmit: function () {
+//    this.refs.alertDialog.dismiss();
+//  },
+//
+//  componentWillMount: function () {
+//
+//    UserStore.getUsers().done(function (data) {
+//      this.setState($.extend(initStateObj, {rowData: data, currentRow: data[0]}));
+//    }.bind(this)).fail(function () {
+//      alert('fail to query users.')
+//    });
+//  },
+//
+//
+//  shouldComponentUpdate: function (nextProp, nextState) {
+//    console.log('shouldComponentUpdate');
+//    return true;
+//  }
+//
+//
+//});
+//
+//module.exports = UserMgr;

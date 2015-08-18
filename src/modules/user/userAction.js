@@ -1,43 +1,23 @@
 /**
  * Created by shi.pengyan on 2015-08-06.
  */
-var AppDispatcher = require('../dispatcher');
-var UserConst = require('./userConst');
+import Reflux from 'reflux';
 
-var userAction = {
-  add: function (user) {
-    AppDispatcher.dispatch({
-      actionType: UserConst.CREATE,
-      user: user
-    });
-  },
+let UserAction = Reflux.createActions([
+  'addUser',
+  'delUser',
+  'updateUser',
+  'queryUsers',
+  'changeUserStatus'
+]);
 
-  update: function (user) {
-    AppDispatcher.dispatch({
-      actionType: UserConst.UPDATE,
-      user: user
-    });
-  },
+//export default UserAction;
 
-  del: function (user) {
-
-  },
-
-  changeStatus: function (id, callback) {
-    AppDispatcher.dispatch({
-      actionType: UserConst.CHANGE_STATUS,
-      id: id,
-      callback: callback
-    });
-  },
-
-  resetPwd: function (id) {
-    AppDispatcher.dispatch({
-      actionType: UserConst.RESET_PWD,
-      id: id
-    });
-  }
-
-};
-
-module.exports = userAction;
+//let UserAction = Reflux.createActions({
+//  'addUser': {asyncResult: true},
+//  'delUser': {asyncResult: true},
+//  'updateUser': {asyncResult: true},
+//  'queryUsers': {asyncResult: true},
+//  'changeUserStatus': {asyncResult: false}
+//});
+module.exports = UserAction;
