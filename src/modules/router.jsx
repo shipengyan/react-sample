@@ -12,7 +12,9 @@ var App = require('./app/app');
 var Home = require('./app/home');
 var NotFound = require('./app/notFound');
 
-var User = require('./user/userMgr');
+var Users = require('./user/userMgr');
+var UserDetail = require('./user/components/userDetail');
+
 var Role = require('./role/roleMgr');
 var Order = require('./order/orderMgr');
 var OrderBook = require('./order/bookMgr'); // nested route
@@ -23,7 +25,9 @@ let AppRoutes = (
   <Route name="root" path="/" handler={App}>
 
     <Route name="home" handler={Home}/>
-    <Route name="user" handler={User}/>
+    <Route name="users" handler={Users}/>
+    <Route name="user" path="/user/:userId" handler={UserDetail}/>
+
     <Route name="role" handler={Role}/>
     <Route name="order" handler={Order}>
       <Route name="book" handler={OrderBook}/>

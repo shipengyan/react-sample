@@ -28,7 +28,8 @@ var Home = React.createClass({
         <LinearProgress mode="indeterminate"/>
         <Grid>
           <Row><Link to="home">Home</Link></Row>
-          <Row><Link to="user">User Management</Link></Row>
+          <Row><Link to="users">User Management</Link></Row>
+          <Row><Link to="user" params={{userId:100}} query={{status:'X'}}>User 100</Link></Row>
           <Row><Link to="order">Order Management</Link></Row>
           <Row><Link to="book">Book Management</Link></Row>
           <Row><Link to="setting">Setting Management</Link></Row>

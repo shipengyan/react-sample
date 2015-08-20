@@ -3,6 +3,7 @@ import Router from 'react-router';
 import PubSub from 'pubsub-js';
 
 //Global Object
+window.React = React;
 window.PubSub = PubSub;
 
 
@@ -12,8 +13,8 @@ var injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
 
 
-Router.run(AppRoutes, function (Handler, state) {
-  React.render(<Handler params={state}/>, document.body);
+Router.run(AppRoutes, function (Handler) {
+  React.render(<Handler/>, document.body);
 });
 
 
