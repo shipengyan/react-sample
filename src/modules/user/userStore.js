@@ -67,6 +67,7 @@ let UserStore = Reflux.createStore({
   },
 
   onQueryUsers() {
+    console.log('userStore query users.');
     if (this.users.length) {
       this.trigger(this.users);
     } else {

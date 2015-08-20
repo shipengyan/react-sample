@@ -18,6 +18,7 @@ let UserForm = require('./components/userForm');
 
 
 let UserMgr = React.createClass({
+
   getInitialState(){
     return {
       currentRow: null
@@ -28,6 +29,8 @@ let UserMgr = React.createClass({
   },
 
   componentDidMount: function () {
+    console.log('user mangement did mount');
+    PubSub.publish('change.module.title', 'User Management');
   },
 
   componentWillUnmount: function () {
@@ -43,7 +46,7 @@ let UserMgr = React.createClass({
 
     return (
       <div>
-        <UserList/>
+        <UserList parentSelectionFunc={this.parentSelectionFunc}/>
         <UserForm ref="userForm"/>
       </div> );
   }

@@ -8,6 +8,8 @@ let { Route, DefaultRoute, RouteHandler, NotFoundRoute } = Router;
 
 
 var App = require('./app/app');
+
+var Home = require('./app/home');
 var NotFound = require('./app/notFound');
 
 var User = require('./user/userMgr');
@@ -19,7 +21,8 @@ var Setting = require('./setting/settingMgr');
 
 let AppRoutes = (
   <Route name="root" path="/" handler={App}>
-    <DefaultRoute handler={User}/>
+
+    <Route name="home" handler={Home}/>
     <Route name="user" handler={User}/>
     <Route name="role" handler={Role}/>
     <Route name="order" handler={Order}>
@@ -27,6 +30,7 @@ let AppRoutes = (
     </Route>
     <Route name="setting" handler={Setting}/>
 
+    <DefaultRoute handler={Home}/>
     <NotFoundRoute handler={NotFound}/>
   </Route>
 );

@@ -31,10 +31,13 @@ let UserList = React.createClass({
     }
     var currentRow = this.state.rowData[selectedRows[0]];
     this.setState({currentRow});
+    this.props.parentSelectionFunc(currentRow);
   },
 
   componentDidMount() {
+    console.log('componentDidMount begin');
     UserAction.queryUsers();
+    console.log('componentDidMount end');
   },
 
   //componentDidUpdate(prevProp, prevState){

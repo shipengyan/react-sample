@@ -7,7 +7,7 @@ let UserAction = Reflux.createActions([
   'addUser',
   'delUser',
   'updateUser',
-  'queryUsers',
+  {'queryUsers': {sync: true}},
   'changeUserStatus'
 ]);
 

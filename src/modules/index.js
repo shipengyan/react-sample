@@ -1,5 +1,10 @@
 import React from 'react';
 import Router from 'react-router';
+import PubSub from 'pubsub-js';
+
+//Global Object
+window.PubSub = PubSub;
+
 
 var AppRoutes = require('./router');
 var injectTapEventPlugin = require('react-tap-event-plugin');
