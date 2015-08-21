@@ -5,10 +5,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import Mui from 'material-ui';
 
-let Bootstrap = require('react-bootstrap');
-
 let { Dialog, FlatButton,Table } = Mui;
-let {ButtonGroup, Button} = Bootstrap;
 
 let UserAction = require('../userAction');
 let UserStore = require('../userStore');
@@ -85,9 +82,9 @@ let UserList = React.createClass({
             onClick={this._handleUserStatus.bind(this, this.state.currentRow)}/>
           <FlatButton label="Reset Password" labelStyle={labelStyle}
                       onClick={this._handleResetPwd.bind(this, this.state.currentRow)}/>
-          <ButtonGroup>
-            <Button onClick={this._handleUserExpired}>Expired</Button>
-          </ButtonGroup>
+          <FlatButton
+            label="Expire" labelStyle={labelStyle}
+            onClick={this._handleUserExpired.bind(this, this.state.currentRow)}/>
 
           {/* wo cao */}
           <Dialog ref="alertDialog"

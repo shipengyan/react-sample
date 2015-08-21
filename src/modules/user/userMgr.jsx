@@ -1,21 +1,12 @@
 import React from 'react';
 import Reflux from 'reflux';
-import Mui from 'material-ui';
 //import Bootstrap from 'react-bootstrap'; //error fuck, it's wield
-
-let Bootstrap = require('react-bootstrap');
-
-
-let {Table, FlatButton, Dialog} = Mui;
-let {ButtonGroup, Button} = Bootstrap;
-
 
 let UserAction = require('./userAction');
 let UserStore = require('./userStore');
 
 let UserList = require('./components/userList');
 let UserForm = require('./components/userForm');
-
 
 let UserMgr = React.createClass({
 
