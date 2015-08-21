@@ -7,8 +7,8 @@ var Bootstrap = require('react-bootstrap');
 var Mui = require('material-ui');
 
 var {Link} =  Router;
-var {Grid,Row,Col} = Bootstrap;
-var {LinearProgress} = Mui;
+var {Grid, Row, Col} = Bootstrap;
+var {Avatar, FlatButton, LinearProgress, Card, CardActions, CardHeader, CardText} = Mui;
 
 
 var Home = React.createClass({
@@ -21,18 +21,51 @@ var Home = React.createClass({
     PubSub.publish('change.module.title', 'Home');
   },
 
+
   render(){
 
     return (
       <div>
-        <LinearProgress mode="indeterminate"/>
         <Grid>
-          <Row><Link to="home">Home</Link></Row>
-          <Row><Link to="users">User Management</Link></Row>
-          <Row><Link to="user" params={{userId:100}} query={{status:'X'}}>User 100</Link></Row>
-          <Row><Link to="order">Order Management</Link></Row>
-          <Row><Link to="book">Book Management</Link></Row>
-          <Row><Link to="setting">Setting Management</Link></Row>
+          <Row>
+            <Col md={6}>
+
+              <Card initiallyExpanded={true}>
+                <CardHeader
+                  title="Application Modules"
+                  subtitle="just for test"
+                  avatar={<Avatar style={{color:'red'}}>A</Avatar>}
+                  showExpandableButton={true}>
+                </CardHeader>
+                <CardText expandable={true}>
+                  <Grid>
+                    <Row> <Link to="home">Home</Link></Row>
+                    <Row><Link to="users">User Management</Link></Row>
+                    <Row><Link to="order">Order Management</Link></Row>
+                    <Row><Link to="book">Book Management</Link></Row>
+                    <Row><Link to="setting">Setting Management</Link></Row>
+                  </Grid>
+                </CardText>
+              </Card>
+
+            </Col>
+
+            <Col md={6}>
+              <Card initiallyExpanded={true}>
+                <CardHeader
+                  title="React Test"
+                  subtitle="just for test"
+                  avatar={<Avatar style={{color:'red'}}>B</Avatar>}
+                  showExpandableButton={true}>
+                </CardHeader>
+                <CardText expandable={true}>
+                  <Grid>
+                    <Row><Link to="user" params={{userId:100}} query={{status:'X'}}>React-Router params and query</Link></Row>
+                  </Grid>
+                </CardText>
+              </Card>
+            </Col>
+          </Row>
         </Grid>
       </div>
     );

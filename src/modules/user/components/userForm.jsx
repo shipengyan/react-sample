@@ -112,7 +112,7 @@ var UserForm = React.createClass({
   },
 
   render: function () {
-    //TODO �����͵Ĳ�Ҫʹ��props����ֵ��������Ҫ����ÿ��change�¼�
+    // TODO 不推荐使用props
     //var name, code, email, mobile, effectDate, expiredDate;
     //if (this.props.user) {
     //  name = this.props.user.name.content;

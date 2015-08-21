@@ -51,7 +51,7 @@ var App = React.createClass({
     console.log('render app page.');
     var menuItems = [
         {text: 'Home', route: 'home'},
-        {text: 'User Management', route: 'user'},
+        {text: 'User Management', route: 'users'},
         {text: 'Role Management', route: 'role'},
         {text: 'Order Management', route: 'order'},
         {text: 'Book Management in Order Mgr', route: 'book'},
