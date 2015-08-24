@@ -5,7 +5,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import Mui from 'material-ui';
 
-let { Dialog, FlatButton,Table } = Mui;
+let { Dialog, FlatButton,Table, Snackbar } = Mui;
 
 let UserAction = require('../userAction');
 let UserStore = require('../userStore');
@@ -80,6 +80,11 @@ let UserList = React.createClass({
           <FlatButton
             label={statusLevel} labelStyle={labelStyle}
             onClick={this._handleUserStatus.bind(this, this.state.currentRow)}/>
+
+          <FlatButton
+            label="Delete" labelStyle={labelStyle}
+            onClick={this._handleDeleteUser.bind(this, this.state.currentRow)}/>
+
           <FlatButton label="Reset Password" labelStyle={labelStyle}
                       onClick={this._handleResetPwd.bind(this, this.state.currentRow)}/>
           <FlatButton
@@ -102,6 +107,11 @@ let UserList = React.createClass({
                   modal={true}>
             {this.state.alertMsg}
           </Dialog>
+
+          <Snackbar
+            ref="snackbar"
+            message="Succeed in deleting the user."
+            autoHideDuration="3000"/>
         </div>
       </div>
     );
@@ -113,6 +123,15 @@ let UserList = React.createClass({
     }
     console.log('handle user state', user);
     UserAction.changeUserStatus(user.id.content);
+  },
+
+  _handleDeleteUser: function (user) {
+    if (!this.state.currentRow) {
+      return;
+    }
+    console.log('delete user');
+    UserAction.delUser(user.id.content);
+    this.refs.snackbar.show();
   },
 
   _handleResetPwd: function (user) {
