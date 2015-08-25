@@ -1,10 +1,11 @@
 /**
  * Created by shi.pengyan on 2015/8/25.
  */
+var Router = require('react-router');
 
 let {PureRenderMixin} = React.addons;
+let { RouteHandler} = Router;
 
-var PureRenderMixinTest = require('./components/pureRenderMixin');
 
 var TestIndex = React.createClass({
 
@@ -13,7 +14,7 @@ var TestIndex = React.createClass({
   render: function () {
     return (
       <div>
-        <PureRenderMixinTest/>
+        <RouteHandler/>
       </div>
     );
   }

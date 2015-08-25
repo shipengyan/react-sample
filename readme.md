@@ -3,7 +3,8 @@
 
 ## Architecture
 * React
-* flux
+* ImmutableJS
+* reflux
 * bootstrap
 * material-ui
 
