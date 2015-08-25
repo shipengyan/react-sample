@@ -6,7 +6,7 @@ import Immutable from 'immutable';
 import Reflux  from 'reflux';
 import UserAction from './userAction';
 
-let {List} = Immutable;
+let {List, Map} = Immutable;
 
 let UserStore = Reflux.createStore({
   listenables: [UserAction],
@@ -19,7 +19,8 @@ let UserStore = Reflux.createStore({
 
   getInitialState() {
     return {
-      rowData: this.users.toJSON()
+      rowData: this.users,
+      currentRow: Map()
     };
   },
 
@@ -34,7 +35,7 @@ let UserStore = Reflux.createStore({
       expiredDate: {content: user.expiredDate}
     };
     this.users = this.users.unshift(row);
-    this.trigger({rowData: this.users.toJSON()});
+    this.trigger({rowData: this.users});
   },
 
   onDelUser(id) {
@@ -42,7 +43,7 @@ let UserStore = Reflux.createStore({
       return item.getIn(['id', 'content']) === id;
     }));
 
-    this.trigger({rowData: this.users.toJSON(), currentRow: null});
+    this.trigger({rowData: this.users, currentRow: null});
   },
 
   onUpdateUser(user) {
@@ -60,7 +61,7 @@ let UserStore = Reflux.createStore({
       });
     });
 
-    this.trigger({rowData: this.users.toJSON()});
+    this.trigger({rowData: this.users});
   },
 
   onChangeUserStatus(id){
@@ -72,7 +73,7 @@ let UserStore = Reflux.createStore({
         return item.getIn(['status', 'content']) === 'Enable' ? 'Disable' : 'Enable';
       });
     });
-    this.trigger({rowData: this.users.toJSON(), currentRow: currentRow.toJSON()});
+    this.trigger({rowData: this.users, currentRow: currentRow});
   },
 
   onQueryUsers() {
@@ -83,7 +84,7 @@ let UserStore = Reflux.createStore({
     } else {
       $.getJSON('static/test/user.json').done((data)=> {
         self.users = Immutable.fromJS(data); //convert to List and Map
-        self.trigger({rowData: self.users.toJSON()});
+        self.trigger({rowData: self.users});
       });
     }
   }

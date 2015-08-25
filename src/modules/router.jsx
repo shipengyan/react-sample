@@ -19,6 +19,7 @@ var Role = require('./role/roleMgr');
 var Order = require('./order/orderMgr');
 var OrderBook = require('./order/bookMgr'); // nested route
 var Setting = require('./setting/settingMgr');
+var TestPage = require('./test/testIndex');
 
 
 let AppRoutes = (
@@ -33,6 +34,8 @@ let AppRoutes = (
       <Route name="book" handler={OrderBook}/>
     </Route>
     <Route name="setting" handler={Setting}/>
+
+    <Route name="test" handler={TestPage}/>
 
     <DefaultRoute handler={Home}/>
     <NotFoundRoute handler={NotFound}/>

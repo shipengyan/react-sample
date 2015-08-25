@@ -5,6 +5,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import Mui from 'material-ui';
 
+let {PureRenderMixin} = React.addons;
 let { Dialog, FlatButton,Table, Snackbar } = Mui;
 
 let UserAction = require('../userAction');
@@ -17,7 +18,7 @@ let UserList = React.createClass({
     parentSelectionFunc: React.PropTypes.func
   },
 
-  mixins: [Reflux.connect(UserStore)], // state放到store中了
+  mixins: [Reflux.connect(UserStore), PureRenderMixin], // state放到store中了
 
   _onRowSelection: function (selectedRows) {
     console.log('row selection', selectedRows);
@@ -26,9 +27,9 @@ let UserList = React.createClass({
       this.setState({currentRow: null});
       return;
     }
-    var currentRow = this.state.rowData[selectedRows[0]];
+    var currentRow = this.state.rowData.get(selectedRows[0]);
     this.setState({currentRow});
-    this.props.parentSelectionFunc(currentRow);
+    this.props.parentSelectionFunc(currentRow.toJSON());
   },
 
   componentDidMount() {
@@ -54,7 +55,7 @@ let UserList = React.createClass({
 
     var statusLevel;
     if (this.state.currentRow) {
-      statusLevel = this.state.currentRow.status.content === 'Enable' ? 'Disable' : 'Enable';
+      statusLevel = this.state.currentRow.getIn(['status', 'content']) === 'Enable' ? 'Disable' : 'Enable';
     } else {
       statusLevel = 'Disable';
     }
@@ -64,7 +65,7 @@ let UserList = React.createClass({
       <div>
         <Table headerColumns={headerCols}
                columnOrder={colOrder}
-               rowData={this.state.rowData}
+               rowData={this.state.rowData.toJSON()}
                height="300px"
                fixedHeader={true}
                stripedRows={true}
@@ -79,17 +80,17 @@ let UserList = React.createClass({
         <div>
           <FlatButton
             label={statusLevel} labelStyle={labelStyle}
-            onClick={this._handleUserStatus.bind(this, this.state.currentRow)}/>
+            onClick={this._handleUserStatus.bind(this, this.state.currentRow.toJSON())}/>
 
           <FlatButton
             label="Delete" labelStyle={labelStyle}
-            onClick={this._handleDeleteUser.bind(this, this.state.currentRow)}/>
+            onClick={this._handleDeleteUser.bind(this, this.state.currentRow.toJSON())}/>
 
           <FlatButton label="Reset Password" labelStyle={labelStyle}
-                      onClick={this._handleResetPwd.bind(this, this.state.currentRow)}/>
+                      onClick={this._handleResetPwd.bind(this, this.state.currentRow.toJSON())}/>
           <FlatButton
             label="Expire" labelStyle={labelStyle}
-            onClick={this._handleUserExpired.bind(this, this.state.currentRow)}/>
+            onClick={this._handleUserExpired.bind(this, this.state.currentRow.toJSON())}/>
 
           {/* wo cao */}
           <Dialog ref="alertDialog"
@@ -111,7 +112,7 @@ let UserList = React.createClass({
           <Snackbar
             ref="snackbar"
             message="Succeed in deleting the user."
-            autoHideDuration="3000"/>
+            autoHideDuration={3000}/>
         </div>
       </div>
     );

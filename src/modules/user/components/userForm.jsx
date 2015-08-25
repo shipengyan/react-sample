@@ -7,12 +7,16 @@ var mui = require('material-ui');
 import DateTime from 'react-datetime';
 import css from 'react-datetime/css/react-datetime.css';
 
+let {PureRenderMixin} = React.addons;
 var {TextField, DatePicker, RaisedButton } = mui;
 
 var UserAction = require('../userAction');
 
 
 var UserForm = React.createClass({
+
+  mixins: [PureRenderMixin],
+
   getInitialState: function () {
     this.currentDate = new Date();
     return {
