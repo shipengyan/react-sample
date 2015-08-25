@@ -12,8 +12,8 @@
 
 ## Development
 
-`npm start`
+`npm run dev`
 
 ## Production
 
-`webpack --progress --config webpack.config.js`
+`npm run production`
