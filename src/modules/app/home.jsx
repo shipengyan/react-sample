@@ -63,6 +63,7 @@ var Home = React.createClass({
                     <Row><Link to="user" params={{userId:100}} query={{status:'X'}}>React-Router params and query</Link></Row>
                     <Row><Link to="/test/pureRenderMixin">PureRenderMixin Test</Link></Row>
                     <Row><Link to="/test/cursor">ImmutableJS Cursor Test</Link></Row>
+                    <Row><Link to="/test/createFragment">React.addons.createFragment Test</Link></Row>
 
                   </Grid>
                 </CardText>
