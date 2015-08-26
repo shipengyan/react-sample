@@ -1,3 +1,6 @@
+/**
+ * shi.pengyan 2015-8-26 22:38:49
+ */
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -11,7 +14,12 @@ module.exports = {
     index: [
       './src/modules/index.js'
     ],
-    vendors: ['react', 'jquery']
+    vendors: [//good practice
+      'jquery', 'immutable', 'pubsub-js',
+      'react', 'react-tap-event-plugin', 'react-mixin',
+      'material-ui', 'react-bootstrap',
+      'react-router', 'reflux'
+    ]
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -43,7 +51,7 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }],
-    noParse: [PubSubJSHomePath, '/pubsub-js/', '/immutable/'] //这里不能忽略react，否则不能合并到vendor中
+    noParse: ['/pubsub-js/', '/immutable/'] //这里不能忽略react，否则不能合并到vendor中
   },
 
   plugins: [

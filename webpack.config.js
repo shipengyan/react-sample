@@ -1,3 +1,6 @@
+/**
+ * shi.pengyan 2015-8-26 22:38:49
+ */
 var path = require('path');
 var webpack = require('webpack');
 
@@ -9,7 +12,12 @@ module.exports = {
       'webpack/hot/only-dev-server',
       './src/modules/index.js'
     ],
-    vendors: ['react', 'jquery']
+    vendors: [ // good practice
+      'jquery', 'immutable', 'pubsub-js',
+      'react', 'react-tap-event-plugin', 'react-mixin',
+      'material-ui', 'react-bootstrap',
+      'react-router', 'reflux'
+    ]
   },
   output: {
     path: path.join(__dirname, 'build'),
