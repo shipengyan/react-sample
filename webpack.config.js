@@ -55,7 +55,7 @@ module.exports = {
     }]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendor.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]

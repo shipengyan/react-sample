@@ -58,7 +58,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendor.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     }),
