@@ -1,14 +1,13 @@
 var React = require('react');
 var Router = require('react-router');
-var bootstrap = require('react-bootstrap');
 var Mui = require('material-ui');
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 let {AppCanvas, AppBar,  MenuItem, LeftNav, Mixins, Styles} = Mui;
-let {Spacing, Colors, Typography} = Styles;
-let { StyleResizable, StylePropable } = Mixins;
+let {Spacing, Colors} = Styles;
+let {StyleResizable, StylePropable } = Mixins;
 
-let { Route, DefaultRoute, RouteHandler, Link } = Router;
+let {RouteHandler } = Router;
 
 
 var App = React.createClass({

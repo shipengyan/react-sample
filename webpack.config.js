@@ -1,8 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
-
 module.exports = {
   devtool: 'source-map',
   entry: {
@@ -10,7 +8,8 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       './src/modules/index.js'
-    ]
+    ],
+    vendors: ['react', 'jquery']
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -48,7 +47,7 @@ module.exports = {
     }]
   },
   plugins: [
-    commonsPlugin,
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendor.js'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]

@@ -8,7 +8,7 @@ var Mui = require('material-ui');
 
 var {Link} =  Router;
 var {Grid, Row, Col} = Bootstrap;
-var {Avatar, FlatButton, LinearProgress, Card, CardActions, CardHeader, CardText} = Mui;
+var {Avatar, FlatButton, Card, CardActions, CardHeader, CardText} = Mui;
 
 
 var Home = React.createClass({

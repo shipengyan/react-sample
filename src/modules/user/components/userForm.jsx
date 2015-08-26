@@ -3,9 +3,9 @@
  */
 var React = require('react');
 var mui = require('material-ui');
-//require('react-datetime/css/react-datetime.css');
-import DateTime from 'react-datetime';
-import css from 'react-datetime/css/react-datetime.css';
+
+//import DateTime from 'react-datetime';
+//import 'react-datetime/css/react-datetime.css';
 
 let {PureRenderMixin} = React.addons;
 var {TextField, DatePicker, RaisedButton } = mui;
@@ -166,7 +166,6 @@ var UserForm = React.createClass({
 
         <div className="row">
           <div className="col-md-3">
-            <DateTime dateFormat="YYYY-MM-DD"/>
           </div>
           <div className="col-md-3"></div>
         </div>

@@ -2,14 +2,16 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
+var node_modules = path.resolve(__dirname, 'node_modules');
+var ReactHomePath = path.resolve(node_modules, 'react');
 
 module.exports = {
-  //devtool: 'source-map',
+  devtool: 'source-map',
   entry: {
     index: [
       './src/modules/index.js'
-    ]
+    ],
+    vendors: ['react', 'jquery']
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -40,16 +42,23 @@ module.exports = {
       loaders: ['babel-loader'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
-    }]
+    }],
+    noParse: [PubSubJSHomePath, '/pubsub-js/', '/immutable/'] //这里不能忽略react，否则不能合并到vendor中
   },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    commonsPlugin,
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendor.js'),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     }),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        //supresses warnings, usually from module minification
+        warnings: false
+      }
+    })
   ]
 };

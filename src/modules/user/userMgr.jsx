@@ -2,9 +2,6 @@ import React from 'react';
 import Reflux from 'reflux';
 //import Bootstrap from 'react-bootstrap'; //error fuck, it's wield
 
-let UserAction = require('./userAction');
-let UserStore = require('./userStore');
-
 let UserList = require('./components/userList');
 let UserForm = require('./components/userForm');
 
