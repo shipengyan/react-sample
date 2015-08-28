@@ -22,16 +22,6 @@ var config = {
       'react', 'react-tap-event-plugin', 'react-mixin',
       'material-ui', 'react-bootstrap',
       'react-router', 'reflux'
-    ],
-    index: [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      './src/modules/index.js'
-    ],
-    'antd': [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      './src/antd/index.js'
     ]
   },
   output: {
@@ -82,6 +72,18 @@ var config = {
   ]
 };
 
+//parse entry page
+var baseDevServers = ['webpack-dev-server/client?http://localhost:3000', 'webpack/hot/only-dev-server'];
+
+var entryPages = {
+  'index': './src/modules/index.js',
+  'antd': './src/antd/index.js'
+};
+for (var key in entryPages) {
+  config.entry[key] = baseDevServers.concat(entryPages[key]);
+}
+
+
 //deps.forEach(function (dep) {
 //  console.log(dep);
 //  //console.log(path.sep);//cannot use path.sep this is with platform
@@ -89,5 +91,6 @@ var config = {
 //  config.resolve.alias[dep.split('/')[0]] = depPath;
 //  config.module.noParse.push(depPath);
 //});
+
 
 module.exports = config;
