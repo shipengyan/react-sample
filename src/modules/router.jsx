@@ -24,7 +24,7 @@ var TestPage = require('./test/testIndex');
 var PureRenderMixinTest = require('./test/components/pureRenderMixin');
 var CursorTest = require('./test/components/cursorTest');
 var CreateFragmentTest = require('./test/components/createFragment');
-var RequrieSureTest = require('./test/components/testRequire');
+var LazyLoadEntryTest = require('./test/components/LazyLoadEntry');
 
 let AppRoutes = (
   <Route name="root" path="/" handler={App}>
@@ -43,7 +43,7 @@ let AppRoutes = (
       <Route path="/test/pureRenderMixin" handler={PureRenderMixinTest}/>
       <Route path="/test/cursor" handler={CursorTest}/>
       <Route path="/test/createFragment" handler={CreateFragmentTest}/>
-      <Route path="/test/requireSure" handler={RequrieSureTest}/>
+      <Route path="/test/lazyLoadEntry" handler={LazyLoadEntryTest}/>
     </Route>
 
     <DefaultRoute handler={Home}/>
