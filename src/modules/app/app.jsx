@@ -3,7 +3,7 @@ var Router = require('react-router');
 var Mui = require('material-ui');
 
 let ThemeManager = new Mui.Styles.ThemeManager();
-let {AppCanvas, AppBar,  MenuItem, LeftNav, Mixins, Styles} = Mui;
+let {AppCanvas, AppBar,  MenuItem, LeftNav, FlatButton, Mixins, Styles} = Mui;
 let {Spacing, Colors} = Styles;
 let {StyleResizable, StylePropable } = Mixins;
 
@@ -68,7 +68,9 @@ var App = React.createClass({
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems} onChange={this._handleLeftNavChange}/>
         <AppBar title={this.state.moduleTitle}
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
-                onLeftIconButtonTouchTap={this._handleLeftMenu}/>
+                onLeftIconButtonTouchTap={this._handleLeftMenu}
+                iconElementRight={<FlatButton label="Home" onClick={this._handleBtnHome} />}
+          />
 
         <div style={styles.root}>
           <RouteHandler/>
@@ -79,6 +81,10 @@ var App = React.createClass({
 
   _handleLeftMenu: function () {
     this.refs.leftNav.toggle();
+  },
+
+  _handleBtnHome: function () {
+    this.context.router.transitionTo('home');
   },
 
   _handleLeftNavChange: function (e, selectedIndex, menuItem) {
