@@ -5,10 +5,15 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var node_modules = path.resolve(__dirname, 'node_modules');
-var ReactHomePath = path.resolve(node_modules, 'react');
+var node_modules_dir = path.resolve(__dirname, 'node_modules');
+var ReactHomePath = path.resolve(node_modules_dir, 'react');
 
-module.exports = {
+var deps = [
+  'react/dist/react.min.js',
+  'react-router/dist/react-router.min.js'
+];
+
+var config = {
   devtool: 'source-map',
   entry: {
     vendors: [//good practice
@@ -26,10 +31,14 @@ module.exports = {
     chunkFilename: "[name].min.js"
   },
   resolve: {
+    alias: {},
     extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [{
+      test: path.resolve(node_modules_dir, deps[0]),
+      loader: "expose?React"
+    }, {
       test: /\.woff[0-9]?$/,
       loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
@@ -52,7 +61,7 @@ module.exports = {
     }],
 
     //这里不能忽略react，否则不能合并到vendor中
-    noParse: [/pubsub-js/, /immutable/, /react-mixin/, /reflux/]
+    noParse: [/pubsub-js/, /jquery/]
   },
 
   plugins: [
@@ -72,3 +81,12 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ]
 };
+
+
+deps.forEach(function (dep) {
+  var depPath = path.resolve(node_modules_dir, dep);
+  config.resolve.alias[dep.split(path.sep)[0]] = depPath;
+  config.module.noParse.push(depPath);
+});
+
+module.exports = config;

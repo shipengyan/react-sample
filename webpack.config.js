@@ -4,7 +4,17 @@
 var path = require('path');
 var webpack = require('webpack');
 
-module.exports = {
+var node_modules_dir = path.resolve(__dirname, 'node_modules');
+
+//var deps = [
+//  'react/dist/react.min.js',
+//  'react-router/dist/react-router.min.js',
+//  'react-bootstrap/dist/react-bootstrap.min.js',
+//  'immutable/dist/immutable.min.js',
+//  'antd/dist/antd-0.8.0.min.js'
+//];
+
+var config = {
   devtool: 'source-map',
   entry: {
     vendors: [ // good practice
@@ -31,10 +41,14 @@ module.exports = {
     chunkFilename: "[name].min.js"
   },
   resolve: {
+    alias: {},
     extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [{
+      //  test: path.resolve(node_modules_dir, deps[0]),
+      //  loader: "expose?React"
+      //}, {
       test: /\.woff[0-9]?$/,
       loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
@@ -59,7 +73,7 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }],
-    noParse: ['/pubsub-js/', '/immutable/', '/react-mixin/', '/reflux/']
+    noParse: [/pubsub-js/, /jquery/]
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.min.js'),
@@ -67,3 +81,13 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ]
 };
+
+//deps.forEach(function (dep) {
+//  console.log(dep);
+//  //console.log(path.sep);//cannot use path.sep this is with platform
+//  var depPath = path.resolve(node_modules_dir, dep);
+//  config.resolve.alias[dep.split('/')[0]] = depPath;
+//  config.module.noParse.push(depPath);
+//});
+
+module.exports = config;
