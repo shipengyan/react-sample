@@ -7,6 +7,12 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: {
+    vendors: [ // good practice
+      'jquery', 'immutable', 'pubsub-js',
+      'react', 'react-tap-event-plugin', 'react-mixin',
+      'material-ui', 'react-bootstrap',
+      'react-router', 'reflux'
+    ],
     index: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
@@ -16,18 +22,12 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       './src/antd/index.js'
-    ],
-    vendors: [ // good practice
-      'jquery', 'immutable', 'pubsub-js',
-      'react', 'react-tap-event-plugin', 'react-mixin',
-      'material-ui', 'react-bootstrap',
-      'react-router', 'reflux'
     ]
   },
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: '/build/',
-    filename: '[name].js',
+    filename: '[name].min.js',
     chunkFilename: "[name].min.js"
   },
   resolve: {
