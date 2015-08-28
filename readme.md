@@ -5,7 +5,7 @@
 * React
 * ImmutableJS
 * reflux
-* bootstrap
+* react-bootstrap
 * material-ui
 
 * babel

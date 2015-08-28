@@ -55,7 +55,7 @@ var config = {
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
     }, {
       test: /\.jsx?$/,
-      loaders: ['babel-loader'],
+      loaders: ['babel-loader?stage=0'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }],

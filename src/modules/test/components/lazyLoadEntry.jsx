@@ -18,7 +18,7 @@ export default class TestRequire extends React.Component {
       console.log('TestRequire DOM Node is', dom); // 当前整个DOM
       console.log('will mount node', this.refs.a.getDOMNode());//引用的DOM
 
-    }, 'test.requireModule'); //模块名很重要，对应chunk的name
+    }, 'test/requireModule'); //模块名很重要，对应chunk的name
   }
 
   render() {

@@ -65,6 +65,10 @@ var Home = React.createClass({
                     <Row><Link to="/test/cursor">ImmutableJS Cursor Test</Link></Row>
                     <Row><Link to="/test/createFragment">React.addons.createFragment Test</Link></Row>
                     <Row><Link to="/test/lazyLoadEntry">懒加载模块</Link></Row>
+                    <Row><Link to="/test/twoWayBind">双向绑定辅助方法</Link></Row>
+
+
+
 
                   </Grid>
                 </CardText>
