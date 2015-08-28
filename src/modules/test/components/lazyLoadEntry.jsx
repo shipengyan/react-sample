@@ -14,7 +14,7 @@ export default class TestRequire extends React.Component {
 
   _hanldeBtnClick() {
     //TODO 按需加载模块内容，这点对于模块化加载很重要
-    require.ensure(['./lazyLoadModule'], ()=> {
+    require.ensure(['./lazyLoadModule'], (require)=> {
       let LazyModule = require('./lazyLoadModule');
 
       React.render(<LazyModule/>, this.refs.a.getDOMNode()); // looks good
