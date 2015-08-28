@@ -7,12 +7,7 @@ export default class TestRequire extends React.Component {
     super();
   }
 
-  //TODO 语法错误，不知道为何，有人知道吗？
-  //_hanldeBtnClick = () => {
-  //
-  //}
-
-  _hanldeBtnClick() {
+  _hanldeBtnClick = () => {
     //TODO 按需加载模块内容，这点对于模块化加载很重要
     require.ensure(['./lazyLoadModule'], (require)=> {
       let LazyModule = require('./lazyLoadModule');
@@ -23,7 +18,7 @@ export default class TestRequire extends React.Component {
       console.log('TestRequire DOM Node is', dom); // 当前整个DOM
       console.log('will mount node', this.refs.a.getDOMNode());//引用的DOM
 
-    }, 'testRequireModule'); //模块名很重要，对应chunk的name
+    }, 'test.requireModule'); //模块名很重要，对应chunk的name
   }
 
   render() {

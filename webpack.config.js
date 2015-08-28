@@ -69,7 +69,7 @@ var config = {
       exclude: /node_modules/
     }, {
       test: /\.jsx?$/,
-      loaders: ['react-hot', 'babel-loader'],
+      loaders: ['react-hot', 'babel-loader?stage=0'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }],
