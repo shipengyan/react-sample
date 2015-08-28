@@ -56,6 +56,7 @@ var App = React.createClass({
         {text: 'Book Management in Order Mgr', route: 'book'},
         {text: 'Setting Management', route: 'setting'},
         {text: 'Tests', route: 'test'},
+        {text: 'Ant Design', route: 'antd'},
         {text: 'Category', type: MenuItem.Types.SUBHEADER},
         {text: 'GitHub', type: MenuItem.Types.LINK, payload: 'https://github.com/'},
         {text: 'This is Disabled', disabled: true}

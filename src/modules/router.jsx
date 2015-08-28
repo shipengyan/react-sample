@@ -25,6 +25,7 @@ var PureRenderMixinTest = require('./test/components/pureRenderMixin');
 var CursorTest = require('./test/components/cursorTest');
 var CreateFragmentTest = require('./test/components/createFragment');
 
+
 let AppRoutes = (
   <Route name="root" path="/" handler={App}>
 
@@ -38,10 +39,10 @@ let AppRoutes = (
     </Route>
     <Route name="setting" handler={Setting}/>
 
-    <Route path="test" handler={TestPage}>
-      <Route path="pureRenderMixin" handler={PureRenderMixinTest}/>
-      <Route path="cursor" handler={CursorTest}/>
-      <Route path="createFragment" handler={CreateFragmentTest}/>
+    <Route name="test" handler={TestPage}>
+      <Route path="/test/pureRenderMixin" handler={PureRenderMixinTest}/>
+      <Route path="/test/cursor" handler={CursorTest}/>
+      <Route path="/test/createFragment" handler={CreateFragmentTest}/>
     </Route>
 
     <DefaultRoute handler={Home}/>

@@ -12,6 +12,11 @@ module.exports = {
       'webpack/hot/only-dev-server',
       './src/modules/index.js'
     ],
+    antd: [
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      './src/antd/index.js'
+    ],
     vendors: [ // good practice
       'jquery', 'immutable', 'pubsub-js',
       'react', 'react-tap-event-plugin', 'react-mixin',
@@ -22,7 +27,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: '/build/',
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename: "[name].min.js"
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -52,10 +58,11 @@ module.exports = {
       loaders: ['react-hot', 'babel-loader'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
-    }]
+    }],
+    noParse: ['/pubsub-js/', '/immutable/', '/react-mixin/', '/reflux/']
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.min.js'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]

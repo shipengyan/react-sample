@@ -11,20 +11,19 @@ var ReactHomePath = path.resolve(node_modules, 'react');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    index: [
-      './src/modules/index.js'
-    ],
     vendors: [//good practice
       'jquery', 'immutable', 'pubsub-js',
       'react', 'react-tap-event-plugin', 'react-mixin',
       'material-ui', 'react-bootstrap',
       'react-router', 'reflux'
-    ]
+    ],
+    index: ['./src/modules/index.js']
   },
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: '/build/',
-    filename: '[name].js'
+    filename: '[name].min.js',
+    chunkFilename: "[name].min.js"
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -51,14 +50,16 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }],
-    noParse: ['/pubsub-js/', '/immutable/'] //这里不能忽略react，否则不能合并到vendor中
+
+    //这里不能忽略react，否则不能合并到vendor中
+    noParse: [/pubsub-js/, /immutable/, /react-mixin/, /reflux/]
   },
 
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.min.js'),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     }),
@@ -67,6 +68,7 @@ module.exports = {
         //supresses warnings, usually from module minification
         warnings: false
       }
-    })
+    }),
+    new webpack.NoErrorsPlugin()
   ]
 };
