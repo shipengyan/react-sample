@@ -8,7 +8,7 @@
     "dev": "node server.js",
     "production": "webpack -p --colors --progress --profile --config webpack.production.config.js",
     "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/jest/index.js"
   },
   "author": "shi.pengyan",
   "license": "MIT",

@@ -55,7 +55,7 @@ var Home = React.createClass({
                 <CardHeader
                   title="React Test"
                   subtitle="just for test"
-                  avatar={<Avatar style={{color:'red'}}>B</Avatar>}
+                  avatar={<Avatar style={{color:'red'}}>R</Avatar>}
                   showExpandableButton={true}>
                 </CardHeader>
                 <CardText expandable={true}>
