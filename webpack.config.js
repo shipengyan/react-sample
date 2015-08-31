@@ -42,13 +42,7 @@ var config = {
       test: /\.woff[0-9]?$/,
       loader: "url-loader?limit=10000&mimetype=application/font-woff"
     }, {
-      test: /\.ttf$/,
-      loader: "file-loader"
-    }, {
-      test: /\.eot$/,
-      loader: "file-loader"
-    }, {
-      test: /\.svg$/,
+      test: /\.(ttf|eot|svg$)$/,
       loader: "file-loader"
     }, {
       test: /\.css$/,
