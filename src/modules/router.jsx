@@ -26,6 +26,7 @@ var CursorTest = require('./test/components/cursorTest');
 var CreateFragmentTest = require('./test/components/createFragment');
 var LazyLoadEntryTest = require('./test/components/LazyLoadEntry');
 import TwoWayBindHelper from './test/components/twoWayBindHelper.jsx';
+import ES6 from './test/components/es6';
 
 
 let AppRoutes = (
@@ -47,6 +48,7 @@ let AppRoutes = (
       <Route path="/test/createFragment" handler={CreateFragmentTest}/>
       <Route path="/test/lazyLoadEntry" handler={LazyLoadEntryTest}/>
       <Route path="/test/twoWayBind" handler={TwoWayBindHelper}/>
+      <Route path="/test/es6" handler={ES6}/>
     </Route>
 
     <DefaultRoute handler={Home}/>
