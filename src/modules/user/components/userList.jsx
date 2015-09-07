@@ -34,7 +34,13 @@ let UserList = React.createClass({
 
   componentDidMount() {
     console.log('componentDidMount begin');
-    UserAction.queryUsers();
+
+    //catch 部分移到Global中
+    UserAction.queryUsers().catch(()=> {
+      this.setState({alertMsg: 'Fail to load users data. )'});
+      this.refs.alertDialog.show();
+    });
+
     console.log('componentDidMount end');
   },
 
@@ -91,6 +97,10 @@ let UserList = React.createClass({
           <FlatButton
             label="Expire" labelStyle={labelStyle}
             onClick={this._handleUserExpired.bind(this, this.state.currentRow.toJSON())}/>
+
+          <FlatButton
+            label="Load Ajax Error" labelStyle={labelStyle}
+            onClick={this._handleLoadAjaxError}/>
 
           {/* wo cao */}
           <Dialog ref="alertDialog"
@@ -153,7 +163,21 @@ let UserList = React.createClass({
 
   _handleCustomDialogSubmit: function () {
     this.refs.alertDialog.dismiss();
+  },
+
+  _handleLoadAjaxError: function () {
+    console.log('handle load ajax error.');
+
+    var self = this;
+    UserAction.loadAjaxError().then((data)=> {
+      console.log('success');
+    }, ()=> {
+      console.log('fail');
+      self.setState({alertMsg: 'Fail to load ajax error'});
+      self.refs.alertDialog.show();
+    });
   }
+
 });
 
 module.exports = UserList;

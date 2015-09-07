@@ -77,16 +77,27 @@ let UserStore = Reflux.createStore({
   },
 
   onQueryUsers() {
+    //var self = this;
+    //console.log('userStore query users.');
+    //if (this.users.length) {
+    //  this.trigger(this.users);
+    //} else {
+    //  $.getJSON('static/test/user.json').done((data)=> {
+    //    self.users = Immutable.fromJS(data); //convert to List and Map
+    //    self.trigger({rowData: self.users});
+    //  });
+    //}
+  },
+
+  //function are the same
+  onQueryUsersCompleted(data){
+    console.log('query user complete');
     var self = this;
-    console.log('userStore query users.');
-    if (this.users.length) {
-      this.trigger(this.users);
-    } else {
-      $.getJSON('static/test/user.json').done((data)=> {
-        self.users = Immutable.fromJS(data); //convert to List and Map
-        self.trigger({rowData: self.users});
-      });
-    }
+    self.users = Immutable.fromJS(data); //convert to List and Map
+    self.trigger({rowData: self.users});
+  },
+
+  a(){
   }
 
 });
