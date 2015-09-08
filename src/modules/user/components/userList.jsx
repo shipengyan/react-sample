@@ -35,7 +35,7 @@ let UserList = React.createClass({
   componentDidMount() {
     console.log('componentDidMount begin');
 
-    //catch 部分移到Global中
+    //TODO catch 部分移到Global中
     UserAction.queryUsers().catch(()=> {
       this.setState({alertMsg: 'Fail to load users data. )'});
       this.refs.alertDialog.show();

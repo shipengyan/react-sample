@@ -24,9 +24,11 @@ var TestPage = require('./test/testIndex');
 var PureRenderMixinTest = require('./test/components/pureRenderMixin');
 var CursorTest = require('./test/components/cursorTest');
 var CreateFragmentTest = require('./test/components/createFragment');
-var LazyLoadEntryTest = require('./test/components/LazyLoadEntry');
 import TwoWayBindHelper from './test/components/twoWayBindHelper.jsx';
 import ES6 from './test/components/es6';
+
+import WebPackIndex from './test/webpack/index.jsx';
+import LazyLoadEntryTest from './test/webpack/lazyLoadEntry';
 
 
 let AppRoutes = (
@@ -43,12 +45,15 @@ let AppRoutes = (
     <Route name="setting" handler={Setting}/>
 
     <Route name="test" handler={TestPage}>
-      <Route path="/test/pureRenderMixin" handler={PureRenderMixinTest}/>
-      <Route path="/test/cursor" handler={CursorTest}/>
-      <Route path="/test/createFragment" handler={CreateFragmentTest}/>
-      <Route path="/test/lazyLoadEntry" handler={LazyLoadEntryTest}/>
-      <Route path="/test/twoWayBind" handler={TwoWayBindHelper}/>
-      <Route path="/test/es6" handler={ES6}/>
+      <Route name="pureRenderMixin" handler={PureRenderMixinTest}/>
+      <Route name="cursor" handler={CursorTest}/>
+      <Route name="createFragment" handler={CreateFragmentTest}/>
+      <Route name="webpack" handler={WebPackIndex}>
+        <Route name="lazyLoadEntry" handler={LazyLoadEntryTest}/>
+      </Route>
+
+      <Route name="twoWayBind" handler={TwoWayBindHelper}/>
+      <Route name="es6" handler={ES6}/>
     </Route>
 
     <DefaultRoute handler={Home}/>

@@ -10,7 +10,18 @@ let UserAction = Reflux.createActions([
   'delUser',
   'updateUser',
   //{'queryUsers': {sync: true}},
-  {'queryUsers': {asyncResult: true}},
+  {
+    'queryUsers': {
+      asyncResult: true,
+      preEmit: function (params) {
+        console.log('preEmit:' + params);
+      },
+      shouldEmit: function (params) {
+        console.log('shouldEmit:' + params);
+        return true;
+      }
+    }
+  },
   'changeUserStatus',
   {'loadAjaxError': {asyncResult: true}}
 ]);
