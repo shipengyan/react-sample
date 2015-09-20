@@ -46,14 +46,14 @@ var config = {
       loader: "file-loader"
     }, {
       test: /\.css$/,
-      loaders: ['react-hot', "style-loader", "css-loader"]
+      loaders: ["style-loader", "css-loader"]
     }, {
       test: /\.less$/,
-      loaders: ['react-hot', 'less-loader'],
+      loaders: ['less-loader'],
       exclude: /node_modules/
     }, {
       test: /\.jsx?$/,
-      loaders: ['react-hot', 'babel-loader?stage=0'],
+      loaders: ['babel-loader'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }],

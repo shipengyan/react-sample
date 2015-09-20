@@ -7,7 +7,6 @@ var Bootstrap = require('react-bootstrap');
 var Mui = require('material-ui');
 
 var {Link} =  Router;
-var {Grid, Row, Col} = Bootstrap;
 var {Avatar, FlatButton, Card, CardActions, CardHeader, CardText} = Mui;
 
 
@@ -26,68 +25,58 @@ var Home = React.createClass({
 
     return (
       <div>
-        <Grid>
-          <Row>
-            <Col md={6}>
+        <div className="row">
+          <div className="col-md-6">
+            <Card initiallyExpanded={true}>
+              <CardHeader
+                title="Application Modules"
+                subtitle="just for test"
+                avatar={<Avatar style={{color:'red'}}>A</Avatar>}
+                showExpandableButton={true}>
+              </CardHeader>
+              <CardText expandable={true}>
 
-              <Card initiallyExpanded={true}>
-                <CardHeader
-                  title="Application Modules"
-                  subtitle="just for test"
-                  avatar={<Avatar style={{color:'red'}}>A</Avatar>}
-                  showExpandableButton={true}>
-                </CardHeader>
-                <CardText expandable={true}>
-                  <Grid>
-                    <Row> <Link to="home">Home</Link></Row>
-                    <Row><Link to="users">User Management</Link></Row>
-                    <Row><Link to="order">Order Management</Link></Row>
-                    <Row><Link to="book">Book Management</Link></Row>
-                    <Row><Link to="setting">Setting Management</Link></Row>
-                  </Grid>
-                </CardText>
-              </Card>
+                <ul className="list-group">
+                  <li className="list-group-item"><Link to="home">Home</Link></li>
+                  <li className="list-group-item"><Link to="users">User Management</Link></li>
+                  <li className="list-group-item"><Link to="order">Order Management</Link></li>
+                  <li className="list-group-item"><Link to="book">Book Management</Link></li>
+                  <li className="list-group-item"><Link to="setting">Setting Management</Link></li>
+                </ul>
 
-            </Col>
+              </CardText>
+            </Card>
 
-            <Col md={6}>
-              <Card initiallyExpanded={true}>
-                <CardHeader
-                  title="React Test"
-                  subtitle="just for test"
-                  avatar={<Avatar style={{color:'red'}}>R</Avatar>}
-                  showExpandableButton={true}>
-                </CardHeader>
-                <CardText expandable={true}>
-                  <Grid>
-                    <Row><Link to="user" params={{userId:100}} query={{status:'X'}}>React-Router params and query</Link></Row>
-                    <Row><Link to="/test/pureRenderMixin">PureRenderMixin Test</Link></Row>
-                    <Row><Link to="/test/cursor">ImmutableJS Cursor Test</Link></Row>
-                    <Row><Link to="/test/createFragment">React.addons.createFragment Test</Link></Row>
-                    <Row><Link to="/test/twoWayBind">双向绑定辅助方法</Link></Row>
-                    <Row><Link to="/test/es6">ES6</Link></Row>
+          </div>
 
-                  </Grid>
+          <div className="col-md-6">
+            <Card initiallyExpanded={true}>
+              <CardHeader
+                title="React Test"
+                subtitle="just for test"
+                avatar={<Avatar style={{color:'red'}}>R</Avatar>}
+                showExpandableButton={true}>
+              </CardHeader>
+              <CardText expandable={true}>
 
-                  <div className="row">
-                    <div className="panel panel-default">
-                      <div className="panle-body">
-                        <ul className="list-group">
-                          <li className="list-group-item">
-                            <Link to="/test/webpack/lazyLoadEntry">懒加载模块</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                <ul className="list-group">
+                  <li className="list-group-item">
+                    <Link to="user" params={{userId:100}} query={{status:'X'}}>React-Router params and query</Link>
+                  </li>
+                  <li className="list-group-item"><Link to="/test/pureRenderMixin">PureRenderMixin Test</Link></li>
+                  <li className="list-group-item"><Link to="/test/cursor">ImmutableJS Cursor Test</Link></li>
+                  <li className="list-group-item">
+                    <Link to="/test/createFragment">React.addons.createFragment Test</Link></li>
+                  <li className="list-group-item"><Link to="/test/twoWayBind">双向绑定辅助方法</Link></li>
+                  <li className="list-group-item"><Link to="/test/es6">ES6</Link></li>
+                  <li className="list-group-item"><Link to="/test/webpack/lazyLoadEntry">懒加载模块</Link></li>
+                </ul>
 
-                  </div>
+              </CardText>
+            </Card>
+          </div>
+        </div>
 
-                </CardText>
-              </Card>
-            </Col>
-          </Row>
-
-        </Grid>
       </div>
     );
   }
