@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Router from 'react-router';
 import PubSub from 'pubsub-js';
 import jQuery from 'jquery';
@@ -8,13 +9,10 @@ window.PubSub = PubSub;
 window.$ = jQuery;
 
 var AppRoutes = require('./router');
-var injectTapEventPlugin = require('react-tap-event-plugin');
-
-injectTapEventPlugin();
 
 
 Router.run(AppRoutes, function (Handler) {
-  React.render(<Handler/>, document.body);
+  ReactDOM.render(<Handler/>, document.body);
 });
 
 
